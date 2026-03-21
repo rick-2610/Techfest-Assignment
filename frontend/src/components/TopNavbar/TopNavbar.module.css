@@ -1,0 +1,143 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 80px;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+
+    @media (max-width: 480px) {
+        padding: 0 0.5rem;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+
+    img {
+        height: 3rem;
+        width: auto;
+    }
+
+    @media (max-width: 480px){
+        img {
+            height: 2rem;
+        }
+    }
+}
+
+.centerElements {
+    display: flex;
+    gap: 3rem;
+
+    @media (max-width: 480px) {
+        gap: 0.5rem;
+    }
+}
+.centerElements button h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    position: relative;
+
+    @media (max-width: 480px) {
+        font-size: 0.8rem;
+    }
+}
+
+.centerElements button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.centerElements button h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+}
+
+.centerElements button:hover h1::after {
+    transform: scaleX(1);
+}
+
+
+
+.signIn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.signInBtn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: black;
+    background: white;
+    border: none;
+    border-radius: 500px;
+    padding: 0.5rem 1.4rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+
+    @media (max-width: 480px) {
+        font-size: 0.6rem;
+        padding: 0.5rem 0.3rem;
+    }
+}
+
+.profileBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.4rem;
+    font-weight: 600;
+    color: black;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 500px;
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    transition: transform 0.18s ease;
+
+    img {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    @media (max-width: 480px) {
+        padding: 0.1rem 0.4rem;
+
+        img {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+}
+
+.profileBtn:hover { 
+    transform: scale(1.06);
+    transition: transform 0.3s ease;
+}

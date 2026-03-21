@@ -1,0 +1,241 @@
+.appcontainer {
+    min-height: 100vh;
+    background: var(--cream);
+    display: flex;
+    justify-content: center;
+    padding: 7rem 0;
+
+    @media (max-width: 480px) {
+        padding: 6rem 1rem;
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 2rem;
+    color: black;
+    margin: 0;
+}
+
+.pointsPill {
+    border: 3px solid rgb(42, 165, 77);
+    border-radius: 500px;
+    padding: 0.4rem 1.1rem;
+    color: black;
+    white-space: nowrap;
+}
+
+
+.statsRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    .statsRow { grid-template-columns: repeat(2, 1fr); }
+}
+
+.statCard {
+    border: 3px solid #3b3b3b;
+    border-radius: 15px;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-start;
+}
+
+.statValue {
+    font-size: 2rem;
+    color: black;
+}
+
+.statLabel {
+    color: black;
+}
+
+.sectionHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.projectList {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.projectRow {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.1rem 1rem;
+    border-bottom: 1px solid #111;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.projectRow:hover { background: var(--light-text); }
+
+.rowLeft {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.rowInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.rowTitle {
+    font-weight: 700;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.category {
+    color: black;
+}
+
+.rowMeta {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+    .rowMeta { display: none; }
+}
+
+.rowMetaItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    align-items: flex-end;
+}
+
+.label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2a2a2a;
+}
+
+.metaValue {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: darkslategrey;
+}
+
+.statusBadge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 400px;
+    padding: 0.28rem 0.8rem;
+    flex-shrink: 0;
+}
+.statusBadge[data-status="not submitted"] { color: #b8860b; border: 1px solid #3a2f00; }
+.statusBadge[data-status="pending"] { color: #4f8aff; border: 1px solid #1a2a4a; }
+.statusBadge[data-status="approved"] { color: #2d9c5a; border: 1px solid #1a4a2a; }
+.statusBadge[data-status="rejected"] { color: #c0392b; border: 1px solid #3a1515; }
+
+.rowArrow {
+    font-size: 0.9rem;
+    color: gray;
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+}
+.projectRow:hover .rowArrow {
+    color: black;
+    transform: translateX(3px);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 4rem 0;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.browseBtn {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f5f5f5;
+    background: transparent;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+.browseBtn:hover { border-color: gray; }
+
+/* ── Skeleton ── */
+.skeletonList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skeleton {
+    height: 60px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #111 25%, #161616 50%, #111 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #1a1a1a;
+    border-top-color: #f5f5f5;
+    animation: spin 0.8s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
