@@ -355,7 +355,7 @@ export default function Home() {
                 <div className={styles.sticky}>
                     <div className={styles.bg}>
                         <img
-                            src="https://i.pinimg.com/1200x/3c/8d/12/3c8d126ef524fc481af1172642884038.jpg"
+                            src="https://i.pinimg.com/736x/f0/70/83/f0708363e362ec0a8f166833fad7c59b.jpg"
                             alt=""
                             className={styles.bgImage}
                         />
