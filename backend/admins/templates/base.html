@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Admin Panel{% endblock %}</title>
+<style>
+  body { font-family: system-ui, sans-serif; font-size: 14px; background: rgb(230, 230, 230); color: black; display: flex; min-height: 100vh; }
+
+  .sidebar { width: 200px; background: white; border-right: 1px solid #e0e0e0; padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.2rem; position: fixed; top: 0; left: 0; bottom: 0; }
+  .sidebar-title { font-size: 0.95rem; font-weight: 700; color: #111; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e0e0e0; }
+  .nav-section { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; padding: 0.75rem 0.5rem 0.25rem; }
+  .nav-link { display: block; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.82rem; color: gray; text-decoration: none; }
+  .nav-link:hover { background: #f0f0f0; color: black; }
+  .nav-link.active { background: black; color: white; }
+
+  .main { margin-left: 200px; flex: 1; padding: 2rem 2.5rem 4rem; }
+
+
+  .messages { list-style: none; margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .msg { padding: 0.55rem 0.9rem; border-radius: 4px; font-size: 0.82rem; font-weight: 600; }
+  .msg-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #b9dfba; }
+  .msg-warning { background: #fff8e1; color: #b8860b; border: 1px solid #f0d060; }
+  .msg-error   { background: #fdecea; color: #c62828; border: 1px solid #f5c0bb; }
+
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-title">Techfest Admin Panel</div>
+  <a href="{% url 'home' %}" class="nav-link {% block nav_dash %}{% endblock %}">Dashboard</a>
+  <a href="{% url 'users' %}" class="nav-link {% block nav_users %}{% endblock %}">Users</a>
+  <a href="{% url 'projects' %}" class="nav-link {% block nav_proj %}{% endblock %}">Projects</a>
+  <a href="{% url 'submissions' %}" class="nav-link {% block nav_subs %}{% endblock %}">Submissions</a>
+</nav>
+
+<main class="main">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="msg msg-{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

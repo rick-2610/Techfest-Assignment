@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Review Submission{% endblock %}
+{% block nav_subs %}active{% endblock %}
+{% block content %}
+
+<style>
+  .title { font-size: 1.3rem; font-weight: 700; color: black; }
+
+  
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 0.75rem; }
+  .detail-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .detail-label { font-size: 0.7rem; color: gray; }
+  .detail-val   { font-size: 0.8rem; font-weight: 600; color: black; }
+
+  .btn-approve {cursor: pointer; border-radius: 20px; padding: 0.2rem 0.5rem; color: #2e7d32; background-color: #b9dfba; }
+  .btn-reject  {cursor: pointer; border-radius: 20px; padding: 0.2rem 0.5rem; color: #c62828; background-color: #f5c0bb; }
+
+
+</style>
+
+<div style="display: flex; justify-content: space-between;">
+  <h1 class="title">Review Submission</h1>
+  <a href="{% url 'submissions' %}">Back</a>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-item"><span class="detail-label">Name</span><span class="detail-val">{{ submission.user.name }}</span></div>
+  <div class="detail-item"><span class="detail-label">Email</span><span class="detail-val">{{ submission.user.email }}</span></div>
+</div>
+<div>
+  <div class="detail-grid">
+    <div class="detail-item"><span class="detail-label">Title</span><span class="detail-val">{{ submission.project.title }}</span></div>
+    <div class="detail-item"><span class="detail-label">Category</span><span class="detail-val">{{ submission.project.category }}</span></div>
+    <div class="detail-item"><span class="detail-label">Points To Be Awarded</span><span class="detail-val">{{ submission.project.tf_points_awarded }} pts</span></div>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="detail-grid">
+    <div class="detail-item"><span class="detail-label">Status</span>
+      <span class="detail-val">
+        {% if submission.submission_status == 'not submitted' %}<span>Not Submitted</span>
+        {% elif submission.submission_status == 'pending' %}<span>Pending</span>
+        {% elif submission.submission_status == 'approved' %}<span>Approved</span>
+        {% elif submission.submission_status == 'rejected' %}<span>Rejected</span>
+        {% endif %}
+      </span>
+    </div>
+    <div class="detail-item"><span class="detail-label">Submitted At</span><span class="detail-val">{{ submission.submission_time|date:"d M Y, H:i"|default:"—" }}</span></div>
+  </div>
+
+  {% if submission.submission_link %}
+  <div class="detail-item" style="margin-top:0.75rem;">
+    <span class="detail-label">Submission Link</span>
+    <a href="{{ submission.submission_link }}" target="_blank" style="font-size:0.85rem;color:#1a56db;">{{ submission.submission_link }}</a>
+  </div>
+  {% endif %}
+
+  {% if submission.comments %}
+  <div class="detail-item" style="margin-top:0.75rem;">
+    <span class="detail-label">Comments</span>
+    <span class="detail-val">{{ submission.comments }}</span>
+  </div>
+  {% endif %}
+
+  {% if submission.submission_file %}
+  <div class="detail-item" style="margin-top:0.75rem;">
+    <span class="detail-label">PDF</span>
+    <a href="{{ submission.submission_file.url }}" target="_blank">Open PDF</a>
+  </div>
+  {% endif %}
+
+  {% if submission.submission_image %}
+  <div class="detail-item" style="margin-top:0.75rem;">
+    <span class="detail-label">Image</span><br>
+    <img src="{{ submission.submission_image.url }}" style="max-width:320px;border-radius:4px;border:1px solid #e0e0e0;margin-top:0.4rem;">
+  </div>
+  {% endif %}
+</div>
+
+{% if submission.submission_status == 'pending' %}
+<div>
+  <p style="font-size:0.83rem;color:gray;margin:1rem 0;">
+    Award <strong>{{ submission.project.tf_points_awarded }} points</strong> to {{ submission.user.name }}.
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="actions">
+      <button type="submit" name="action" value="approve" class="btn-approve">Approve</button>
+      <button type="submit" name="action" value="reject"  class="btn-reject"  onclick="return confirm('Reject this submission?')">Reject</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Submissions{% endblock %}
+{% block nav_subs %}active{% endblock %}
+{% block content %}
+
+<style>
+  .title { font-size: 1.3rem; font-weight: 700; color: black; }
+
+  .filters { display: flex; gap: 0.4rem; margin: 1rem 0; flex-wrap: wrap; }
+
+  .filter-btn { font-size: 0.7rem; padding: 0.3rem 0.5rem; background: white; text-decoration: none; color: black; }
+  .filter-btn:hover { background: lightgray; }
+  .filter-btn.active {background-color: black; color: white;}
+
+  .badge-ns  { color: orange; }
+  .badge-pen { color: blue; }
+  .badge-app { color: green; }
+  .badge-rej { color: red; }
+
+  table { width: 90%; border-collapse: collapse;}
+  th { font-size: 1rem; font-weight: 700; color: black; padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid gray; }
+  td { padding: 0.5rem 0.75rem;}
+</style>
+
+<div>
+  <h1 class="title">Submissions</h1>
+</div>
+
+<div class="filters">
+  <a href="{% url 'submissions' %}" class="filter-btn {% if not status_filter %}active{% endif %}">All</a>
+  <a href="{% url 'submissions' %}?status=pending" class="filter-btn {% if status_filter == 'pending' %}active{% endif %}">Pending</a>
+  <a href="{% url 'submissions' %}?status=not+submitted" class="filter-btn {% if status_filter == 'not submitted' %}active{% endif %}">Not Submitted</a>
+  <a href="{% url 'submissions' %}?status=approved" class="filter-btn {% if status_filter == 'approved' %}active{% endif %}">Approved</a>
+  <a href="{% url 'submissions' %}?status=rejected" class="filter-btn {% if status_filter == 'rejected' %}active{% endif %}">Rejected</a>
+</div>
+
+<div>
+  <div>
+    <table>
+      <thead>
+        <tr><th>User</th><th>Project</th><th>Status</th><th>Submitted At</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for sub in submissions %}
+        <tr>
+          <td>{{ sub.user.name }}</td>
+          <td>{{ sub.project.title }}</td>
+          <td>
+            {% if sub.submission_status == 'not submitted' %}<span class="badge-ns">Not Submitted</span>
+            {% elif sub.submission_status == 'pending' %}<span class="badge-pen">Pending</span>
+            {% elif sub.submission_status == 'approved' %}<span class="badge-app">Approved</span>
+            {% elif sub.submission_status == 'rejected' %}<span class="badge-rej">Rejected</span>
+            {% endif %}
+          </td>
+          <td>{{ sub.submission_time|date:"d M Y"|default:"—" }}</td>
+          <td><a href="{% url 'submission_review' sub.user.email sub.project.project_id %}">Review</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="color:gray;text-align:center;padding:2rem;">No submissions found</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Users{% endblock %}
+{% block nav_users %}active{% endblock %}
+
+{% block content %}
+<style>
+  .users-title { font-size: 1.3rem; font-weight: 700; color: black; }
+
+  .card {margin-top: 1.25rem; }
+  .card-title { font-size: 0.8rem; font-weight: 700; color: black; margin-bottom: 1rem;}
+
+  table { width: 90%; border-collapse: collapse;}
+  th { font-size: 1rem; font-weight: 700; color: black; padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid gray; }
+  td { padding: 0.5rem 0.75rem;}
+
+</style>
+
+<div>
+  <h1 class="users-title">Users ({{ users|length }})</h1>
+</div>
+<div class="card">
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Organization</th>
+          <th>TF Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.phone|default:"—" }}</td>
+          <td>{{ u.age|default:"—" }}</td>
+          <td>{{ u.organization|default:"—" }}</td>
+          <td>{{ u.tf_points }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" style="color:gray;text-align:center;padding:2rem;">No users yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

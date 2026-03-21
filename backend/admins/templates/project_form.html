@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{{ action }} Project{% endblock %}
+{% block nav_proj %}active{% endblock %}
+{% block content %}
+
+<style>
+  .title { font-size: 1.3rem; font-weight: 700; color: black; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;}
+  .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+
+  
+  input[type=text], input[type=number], input[type=datetime-local], textarea, select {
+    background: #fff; border: 1px solid #d0d0d0; border-radius: 4px;
+    padding: 0.45rem 0.7rem; font-size: 0.85rem; color: #111;
+    outline: none; width: 100%; font-family: inherit;
+  }
+  input:focus, textarea:focus, select:focus { border-color: #111; }
+  textarea { resize: vertical; min-height: 80px; }
+
+  label { color: gray; }
+
+</style>
+<div>
+  <h1 class="title">{{ action }} Project</h1>
+  <a href="{% url 'projects' %}">← Back</a>
+</div>
+<div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" value="{{ project.title|default:'' }}" required>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" name="category" value="{{ project.category|default:'' }}" required>
+      </div>
+      <div class="form-group form-full">
+        <label>Description</label>
+        <textarea name="description" rows="4">{{ project.description|default:'' }}</textarea>
+      </div>
+      <div class="form-group form-full">
+        <label>Skills Required</label>
+        <input type="text" name="skills_required" value="{{ project.skills_required|default:'' }}">
+      </div>
+      <div class="form-group">
+        <label>TF Points Awarded</label>
+        <input type="number" name="tf_points_awarded" value="{{ project.tf_points_awarded|default:'' }}" min="0" required>
+      </div>
+      <div class="form-group">
+        <label>Points to Unlock</label>
+        <input type="number" name="point_to_unlock" value="{{ project.point_to_unlock|default:'' }}" min="0" required>
+      </div>
+      <div class="form-group">
+        <label>Submission Deadline</label>
+        <input type="datetime-local" name="submission_deadline" value="{{ project.submission_deadline|date:'Y-m-d\TH:i'|default:'' }}" required>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="submit">{{ action }} Project</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

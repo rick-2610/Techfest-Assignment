@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Projects{% endblock %}
+{% block nav_proj %}active{% endblock %}
+{% block content %}
+<style>
+  .header {display: flex; justify-content: space-between; margin-bottom: 1.2rem;}
+  .title { font-size: 1.3rem; font-weight: 700; color: black; }
+
+  table { width: 90%; border-collapse: collapse;}
+  th { font-size: 1rem; font-weight: 700; color: black; padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid gray; }
+  td { padding: 0.5rem 0.75rem;}
+</style>
+
+<div class="header">
+  <h1 class="title">Projects ({{ projects|length }})</h1>
+  <a href="{% url 'create_project' %}">+ New Project</a>
+</div>
+<div class="card">
+  <div>
+    <table>
+      <thead>
+        <tr><th>Id</th><th>Title</th><th>Category</th><th>Points Awarded</th><th>Unlock Cost</th><th>Deadline</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for p in projects %}
+        <tr>
+          <td>{{ p.project_id }}</td>
+          <td>{{ p.title }}</td>
+          <td>{{ p.category }}</td>
+          <td>{{ p.tf_points_awarded }}</td>
+          <td>{{ p.point_to_unlock }}</td>
+          <td>{{ p.submission_deadline|date:"d M Y" }}</td>
+          <td>
+              <a href="{% url 'edit_project' p.project_id %}">Edit</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" style="color:gray;text-align:center;padding:2rem;">No projects yet</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

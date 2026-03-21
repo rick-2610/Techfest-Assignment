@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block nav_dash %}active{% endblock %}
+{% block content %}
+<style>
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin: 2rem 0; }
+  .stat-label { font-size: 0.7rem; color: black; margin-top: 0.25rem; }
+
+  .stat-card { background: white; border: 1px solid gray; border-radius: 16px; padding: 1.1rem 1.5rem; }
+  .stat-val { font-size: 1.8rem; font-weight: 700; color: black; }
+</style>
+<div class="page-header">
+  <h1 class="page-title">Admin Panel</h1>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-val">{{ total_users }}</div><div class="stat-label">Users</div></div>
+  <div class="stat-card"><div class="stat-val">{{ total_projects }}</div><div class="stat-label">Projects</div></div>
+  <div class="stat-card"><div class="stat-val">{{ pending_count }}</div><div class="stat-label">Pending Review</div></div>
+  <div class="stat-card"><div class="stat-val">{{ approved_count }}</div><div class="stat-label">Approved</div></div>
+</div>
+{% endblock %}
