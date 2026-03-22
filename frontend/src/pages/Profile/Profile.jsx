@@ -38,9 +38,7 @@ const Profile = () => {
                 pfp: null,
             });
             setPreviewUrl(
-                dbUser.pfp
-                    ? `http://http://13.200.148.118:8000/${dbUser?.pfp}`
-                    : null,
+                dbUser.pfp ? `http://13.200.148.118:8000/${dbUser?.pfp}` : null,
             );
         }
     }, [dbUser]);
@@ -97,7 +95,9 @@ const Profile = () => {
             organization: dbUser?.organization || "",
             pfp: null,
         });
-        setPreviewUrl(dbUser?.pfp ? `${API_URL}${dbUser.pfp}` : null);
+        setPreviewUrl(
+            dbUser?.pfp ? `http://13.200.148.118:3000${dbUser.pfp}` : null,
+        );
     };
 
     const handleSignOut = async () => {
