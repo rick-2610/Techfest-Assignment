@@ -40,9 +40,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email-smtp.ap-south-1.amazonaws.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'AKIAZGUXW2IIF26INFPO'
-EMAIL_HOST_PASSWORD = 'BDqAUwPSj+KsGv3UHVu8JcNqe/hjoCA9vwbI+RCjo+J2'
-DEFAULT_FROM_EMAIL = 'rick.2610.06@gmail.com'
+EMAIL_HOST_USER = os.environ.get('SES_SMTP_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('SES_SMTP_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('SES_FROM_EMAIL')
 
 CORS_ALLOWED_ORGINS = [
     "https://tf-assignment.vercel.app",
