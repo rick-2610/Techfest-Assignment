@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { UserAuth } from "../../context/AuthContext";
 import styles from "./Dashboard.module.css";
 
-const API_URL = "http://localhost:8000/api/";
+const API_URL =
+    "http://localhost:8000/api/" || "http://13.200.148.118:8000/api/";
 
 function formatDate(d) {
     if (!d) return "—";

@@ -15,7 +15,7 @@ import styles from "./Home.module.css";
 
 import marki_guy from "./assets/marki_guy.png";
 
-const API_URL = "http://localhost:8000/api/";
+const API_URL = "http://13.200.148.118:8000/api/";
 
 function Logo({ draw, fillOpacity }) {
     return (
