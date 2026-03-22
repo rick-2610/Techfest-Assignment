@@ -63,7 +63,10 @@ export default function Navbar() {
                 {user ? (
                     <button className={styles.profileBtn} onClick={handleAuth}>
                         <img
-                            src={`http://localhost:8000/${dbUser?.pfp}` || null}
+                            src={
+                                `http://13.200.148.118:8000/${dbUser?.pfp}` ||
+                                null
+                            }
                             alt="avatar"
                             className={styles.avatar}
                         />

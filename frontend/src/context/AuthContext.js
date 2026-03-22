@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
         const provider = new GoogleAuthProvider();
         const result = await signInWithPopup(auth, provider);
 
-        const res = await fetch('http://localhost:8000/api/add-user/', {
+        const res = await fetch('http://http://13.200.148.118:8000/api/add-user/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
 
             if (currentUser?.email) {
                 try {
-                    const res = await fetch('http://localhost:8000/api/user-details/',
+                    const res = await fetch('http://http://13.200.148.118:8000/api/user-details/',
                       {
                         headers: { 'Email': currentUser.email },
                       }

@@ -5,8 +5,7 @@ import { toast } from "react-toastify";
 import { UserAuth } from "../../context/AuthContext";
 import styles from "./Profile.module.css";
 
-const API_URL =
-    "http://localhost:8000/api/" || "http://13.200.148.118:8000/api/";
+const API_URL = "http://13.200.148.118:8000/api/";
 
 const FORM = {
     name: "",
@@ -39,7 +38,9 @@ const Profile = () => {
                 pfp: null,
             });
             setPreviewUrl(
-                dbUser.pfp ? `http://localhost:8000/${dbUser?.pfp}` : null,
+                dbUser.pfp
+                    ? `http://http://13.200.148.118:8000/${dbUser?.pfp}`
+                    : null,
             );
         }
     }, [dbUser]);

@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 
 import styles from "./Projects.module.css";
 
-const API_URL =
-    "http://localhost:8000/api/" || "http://13.200.148.118:8000/api/";
+const API_URL = "http://13.200.148.118:8000/api/";
 
 const containerVariants = {
     hidden: {},
