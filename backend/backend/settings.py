@@ -36,10 +36,18 @@ SECRET_KEY = 'django-insecure-=m#9yr%1cqvj+_j#j0rs-_)i$bbgcmr8l)qwt2iv+8bs7^5l)9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'email-smtp.ap-south-1.amazonaws.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'AKIAZGUXW2IIF26INFPO'
+EMAIL_HOST_PASSWORD = 'BDqAUwPSj+KsGv3UHVu8JcNqe/hjoCA9vwbI+RCjo+J2'
+DEFAULT_FROM_EMAIL = 'rick.2610.06@gmail.com'
 
 CORS_ALLOWED_ORGINS = [
     "https://tf-assignment.vercel.app",
     "http://localhost:3000",
+    'http://13.200.148.118:3000'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

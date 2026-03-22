@@ -9,6 +9,30 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+def send_login_email(user):
+    subject = "You're logged in to Techfest Projects"
+
+    message = f"""
+Hi {user.name},
+
+You have logged into Techfest Projects."""
+
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[user.email],
+            fail_silently=False,
+        )
+    except Exception as e:
+        print(f"Failed to send login email to {user.email}: {e}")
+
+
 @api_view(['GET'])
 def get_user(request):
     try: 
@@ -31,6 +55,8 @@ def add_user(request):
         return Response({'error': 'Email and name are required'}, status=status.HTTP_400_BAD_REQUEST)
 
     user, created = User.objects.get_or_create(email=email, defaults={'name': name})
+
+    send_login_email(user)
 
     return Response({'user': UserSerializer(user).data,}, status=status.HTTP_200_OK)
 
